@@ -11,8 +11,9 @@
     "ejs": "~2.6.1",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
+    "jasmine": "*",
     "morgan": "~1.9.1",
-    "jasmine":"*",
-    "supertest":"*"
+    "nodemon": "^2.0.2",
+    "supertest": "*"
   }
 }

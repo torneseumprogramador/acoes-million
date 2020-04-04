@@ -6,10 +6,11 @@ const Acoes = mongoose.model('acoes',{
     taxa_juros : {type: Number, required: true},
     tipo: {
         type: String,
+        enum: ['Ordinaria', 'Preferencial'],
         required: true,
         message: 'Investidor deve escolher qual tipo de ação ordinaria/preferencial'
     }
-    //tipo = ordinaria/ preferencial 
+    
     
 });
 

@@ -4,7 +4,7 @@ const HomeController = require("../app/controllers/home_controller");
 const AcoesController = require("../app/controllers/acoes_controller");
 
 router.get("/", HomeController.index);
-router.get("/", AcoesController.index);
+router.get("/acoes_million.json", AcoesController.index);
 
 module.exports = router;
 

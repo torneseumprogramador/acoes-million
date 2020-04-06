@@ -1,6 +1,7 @@
 const Acoes = require('../models/acoes');
 const TOKEN = "123456";
 
+teste
 const AcoesController = {
     index: async(req,res, next)=>{
         if(req.headers.token === TOKEN){

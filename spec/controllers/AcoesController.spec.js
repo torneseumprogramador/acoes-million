@@ -80,4 +80,26 @@ describe("AcoesController", () =>{
       done();
     });
   });
+
+  describe("DELETE/acoes.json -",() =>{
+    it('Deve deletar uma ação',async(done) =>{
+
+      let nomeEmpresa = "GOOGLE";
+      //deleta uma ação
+      const acao = await Acao.create({
+        nome_empresa: nomeEmpresa,
+        cod_empresa: "GOGL34",
+        taxa_juros: "4",
+        tipo: "ON"
+     
+      });
+    
+     
+      const response = await request.put(`/acoes/${acao._id}.json`).set('token', TOKEN)
+      expect(response.status).toBe(204);
+
+      done();
+      
+    });
+  }); 
 });

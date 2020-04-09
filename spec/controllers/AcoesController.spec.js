@@ -39,4 +39,31 @@ describe("AcoesController", () =>{
     });
   });
 
+describe("PUT/acoes.json - Deve alterar",() =>{
+
+  it('Deve alterar uma Ação',async(done) =>{
+
+    let nomeEmpresa = "Zoom"
+    //Cria um registro
+    const acao = await Acao.create({
+      nome_empresa: nomeEmpresa,
+      cod_empresa: "ZM001",
+      taxa_juros: "4",
+      tipo: "ON"
+    });
+
+    //Altera o registro criado anteriormente - cod_empresa e taxa_juros
+    const body = {
+      nome_empresa :nomeEmpresa,
+      cod_empresa : "ZM001-alt",
+      taxa_juros:"3",
+      tipo:"ON"
+    };
+    
+    const response = await request.put(`/acoes/${acao._id}.json`).set('token', TOKEN).send(body)
+    done();
+  });
+
+});
+
 });

@@ -38,5 +38,42 @@ describe("AcoesController", () =>{
       done()
     });
   });
+  
+  describe("GET/acoes - Deve retornar uma lista de Acoes ", () => {
+    it("deve retornar o status code de 200", async(done) => {
+      const response = await request.get(`/acoes.json`).set({ 'token': TOKEN})
+      expect(response.status).toBe(200)
+      done();
+    });
+
+    it("deve retornar dados na API", async(done) => {
+       const response = await request.get(`/acoes.json`).set({'token': TOKEN})
+        const itens = response.body;
+        expect(itens[0].nome_empresa).toBe("Itausa Investimentos Itau SA");
+        expect(itens[1].nome_empresa).toBe("Banco Inter SA");
+        done()
+      })
+  });
+
+  describe("PUT /acoes.json ", () => {
+    let nome = `teste ${new Date().getTime()}`;
+      it("deve alterar uma açao", async(done) => {
+     const acoes = await Acao.create({ nome_empresa: nome,
+        cod_empresa: "bidi4",
+        taxa_juros: "1.03",
+        tipo: "pn"
+    }) 
+     const body = { 
+      nome_empresa: "Itausa Investimentos Itau SA",
+      cod_empresa: "ITSA3",
+      taxa_juros: "1.03",
+      tipo: "ON"
+
+    }
+    const response = await request.put(`/acoes/${acoes._id}`).set('token', TOKEN).send(body)
+    expect(response.status).toBe(204);
+    done();
+    });
+  });
 
 });

@@ -32,7 +32,8 @@ const AcoesController = {
       change: async(req, res, next) => {
         if(req.headers.token === TOKEN){
           try{
-            await Acao.findOneAndUpdate({_id: req.params.acoes_id}, { nome_empresa: req.body.nome_empresa, cod_empresa: req.body.cod_empresa, taxa_juros: req.body.taxa_juros, tipo: req.body.tipo.toLowerCase()})
+            
+            await Acao.findOneAndUpdate({_id: req.params.acoes_id}, { nome_empresa: req.body.nome_empresa, cod_empresa: req.body.cod_empresa, taxa_juros: req.body.taxa_juros, tipo: req.body.tipo})
             return res.status(204).send(`Alterado com o id ${req.params.acoes_id}`)
           }
           catch(err){

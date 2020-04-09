@@ -84,7 +84,7 @@ describe("AcoesController", () =>{
   describe("DELETE/acoes.json -",() =>{
     it('Deve deletar uma ação',async(done) =>{
 
-      let nomeEmpresa = "GOOGLE";
+      let nomeEmpresa = "Youtube";
       //deleta uma ação
       const acao = await Acao.create({
         nome_empresa: nomeEmpresa,
@@ -94,9 +94,9 @@ describe("AcoesController", () =>{
      
       });
     
-     
-      const response = await request.put(`/acoes/${acao._id}.json`).set('token', TOKEN)
-      expect(response.status).toBe(204);
+  
+      const response = await request.delete(`/acoes/${acao._id}.json`).set('token', TOKEN)
+      expect(response.status).toBe(200);
 
       done();
       

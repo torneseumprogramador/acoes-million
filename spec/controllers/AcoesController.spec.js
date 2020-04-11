@@ -96,7 +96,7 @@ describe("AcoesController", () =>{
     
   
       const response = await request.delete(`/acoes/${acao._id}.json`).set('token', TOKEN)
-      expect(response.status).toBe(200);
+      expect(response.status).toBe(204);
 
       done();
       

@@ -21,7 +21,7 @@ const AcoesController = {
           const {nome_empresa,cod_empresa,taxa_juros,tipo} = req.body
           try {
             const acao = await Acao.create({nome_empresa,cod_empresa,taxa_juros,tipo});
-            return res.status(201).send(`Ação de ${acao.nome_empresa} de código ${acao.cod_empresa} criada com sucesso.`)
+            return res.status(201).send({message: "ação cadastrada com sucesso."})
           } catch (error) {
             return res.status(401).send(error)
           }

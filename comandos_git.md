@@ -21,7 +21,7 @@ git push
 git checkout master
 
 git merge nome_da_sua_branch
-<<<<<<< HEAD
+
 
 git push origin master
 
@@ -30,4 +30,4 @@ git push origin master
 ## atualizar a branch com a master
 
 git pull origin master
->>>>>>> Everton-acoes-million
+

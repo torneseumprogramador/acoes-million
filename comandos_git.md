@@ -18,6 +18,7 @@ git push
 ## enviar arquivos da branch local para master
 
 git checkout master
+git commit -m "seu commit"
 git merge nome_da_sua_branch
 git push origin master
 

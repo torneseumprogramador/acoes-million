@@ -92,8 +92,16 @@ describe("AcoesController", () =>{
         tipo: "ON"
      
       });
+<<<<<<< HEAD
       const response = await request.delete(`/acoes/${acao._id}.json`).set('token',TOKEN)
       expect(response.status).toBe(204);
+=======
+    
+  
+      const response = await request.delete(`/acoes/${acao._id}.json`).set('token', TOKEN)
+      expect(response.status).toBe(204);
+
+>>>>>>> Everton-acoes-million
       done();
       
     });

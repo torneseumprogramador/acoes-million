@@ -1,36 +1,89 @@
-const AcoesUsuario = require("../../app/models/acao.js");
-describe("Acões de empresas", () => {
+const Acao = require("../../app/models/acao.js");
 
-  beforeEach(async() => {
-    await Acao.deleteMany({}, async(err,removed) => {
-      
-      await Acao.create({
-        nome_empresao: "Google",
-        cod_empresa:"GOGL34",
-        taxa_juros: "4",
-        tipo: "ON"
-      })
-      
-      await AcoesUsuario.create({
-        nome_empresao: "Google",
-        cod_empresa:"GOGL34",
-        taxa_juros: "3",
-        tipo: "ON"
-      })
-    
-      await AcoesUsuario.create({
-        nome_empresao: "Google",
-        cod_empresa:"GOGL34",
-        taxa_juros: "5",
-        tipo: "ON"
-      })
-      
-      await AcoesUsuario.create({
-        nome_empresao: "Zoom",
-        cod_empresa:"ZM001-alt",
-        taxa_juros: "5",
-        tipo: "PN"
-      })
-    })
-  })
-}); 
+describe('Modelo de Ação', () => {
+
+  beforeEach(async ()=>{
+    await Acao.deleteMany()
+  });
+
+  it('Deve retornar o modelo de ação', async () => {
+    const acao = await Acao.find({})
+    expect(acao != undefined).toBe(true)
+
+  });
+
+  it('Deve incluir uma ação', async () => {
+    let nome = `nomeTeste ${new Date().getTime()}`;
+    const acao = await Acao.create({
+      nome_empresa: nome,
+      cod_empresa :'TEST123',
+      taxa_juros: '6',
+      tipo: 'ON'   
+    });
+    expect(acao).not.toBe(undefined)
+  });
+
+  it('Não deve incluir um cod_empresa repetido', async() => {
+    let nome = `nomeTeste2 ${new Date().getTime()}`;
+    let erro=''
+    const acao = await Acao.create({
+      nome_empresa: nome,
+      cod_empresa :'TEST321',
+      taxa_juros: '5',
+      tipo: 'ON'   
+    }); 
+    try{
+      const acao2 = await Acao.create({
+        nome_empresa: nome,
+        cod_empresa :'TEST321',
+        taxa_juros: '5',
+        tipo: 'ON' 
+      });  
+    }
+    catch(err){
+      erro = err
+    }
+    expect(erro).not.toBe(undefined)
+  });
+
+  it('Não deve incluir uma empresa sem nome', async () => {
+    let nome = null;
+    let erro = ''
+    try {
+      const acao = await Acao.create({
+        nome_empresa: nome,
+        cod_empresa :'TEST456',
+        taxa_juros: '3',
+        tipo: 'PN'   
+      }); 
+    } catch (error) {
+      erro = error
+    }
+    expect(erro).not.toBe(undefined)
+  });
+
+
+  it('Não deve alterar um registro', async() => {
+    let nome = `teste ${new Date().getTime()}`;
+    const acao = await Acao.create({
+      nome_empresa: nome,
+      cod_empresa :'TEST456',
+      taxa_juros: '3',
+      tipo: 'PN'   
+    }); 
+    try{
+      const acao = await Acao.findByIdAndUpdate( 'Band',{
+        nome_empresa: nome,
+        cod_empresa :'TEST456',
+        taxa_juros: '3',
+        tipo: 'PN' 
+      });  
+    }
+    catch(error){
+      err = error
+    }
+    expect(err).toBeDefined()
+  });
+
+
+});  

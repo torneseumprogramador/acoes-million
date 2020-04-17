@@ -39,7 +39,7 @@ describe("AcoesController", () =>{
     });
   });
   
-  describe("GET/acoes - Deve retornar uma lista de Acoes ", () => {
+  describe("GET/acoes.json - Deve retornar uma lista de Acoes ", () => {
     it("deve retornar o status code de 200", async(done) => {
       const response = await request.get(`/acoes.json`).set({ 'token': TOKEN})
       expect(response.status).toBe(200)
@@ -91,9 +91,11 @@ describe("AcoesController", () =>{
         taxa_juros: "4",
         tipo: "ON"
      
-      });
-      const response = await request.delete(`/acoes/${acao._id}.json`).set('token',TOKEN)
+      });  
+       
+      const response = await request.delete(`/acoes/${acao._id}.json`).set('token', TOKEN)
       expect(response.status).toBe(204);
+
       done();
       
     });

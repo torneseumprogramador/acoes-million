@@ -28,13 +28,25 @@ const AcoesController = {
         }
         return res.status(401).json({error: "Acesso não autorizado"})
       },
-
       change: async(req, res, next) => {
         if(req.headers.token === TOKEN){
           try{
             
             await Acao.findOneAndUpdate({_id: req.params.acoes_id}, { nome_empresa: req.body.nome_empresa, cod_empresa: req.body.cod_empresa, taxa_juros: req.body.taxa_juros, tipo: req.body.tipo})
             return res.status(204).send(`Alterado com o id ${req.params.acoes_id}`)
+          }
+          catch(err){
+            console.log(err)
+            return res.status(401).send(`Erro: ${err}`)
+          }
+        }
+        return res.status(401).json({error: "Acesso não autorizado"})
+      },
+      getById: async(req, res, next) => {
+        if(req.headers.token === TOKEN){
+          try{
+            const acao = await Acao.findById(req.params.acoes_id)
+            return res.status(200).send(acao)
           }
           catch(err){
             console.log(err)

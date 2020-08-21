@@ -6,6 +6,7 @@ const AcoesController = require("../app/controllers/acoes_controller");
 router.get("/", HomeController.index);
 router.get("/acoes.json", AcoesController.index);
 router.post("/acoes.json", AcoesController.create);
+router.get("/acoes/:acoes_id.json", AcoesController.getById);
 router.put("/acoes/:acoes_id.json", AcoesController.change);
 router.delete("/acoes/:acoes_id.json", AcoesController.delete);
 
